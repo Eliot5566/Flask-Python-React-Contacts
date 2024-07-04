@@ -1,3 +1,4 @@
+#models
 from config import db
 
 class Contact(db.Model):
@@ -13,5 +14,4 @@ class Contact(db.Model):
             "lastName" : self.last_name,
             "email" : self.email,
         }
-    
     

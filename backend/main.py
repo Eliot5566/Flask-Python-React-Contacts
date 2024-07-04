@@ -7,6 +7,18 @@ from models import Contact
 
 
 @app.route("/contacts", methods = ["GET"])
+def get_contacts():
+    contacts = Contact.query.all()
+    json_contacts = list(map(lambda contact: contact.to_json(), contacts))
+    return jsonify({"contacts" : json_contacts})
+
+
+
+
+
+
+
+
 
 @app.route("/create_contact", methods = ["POST"])
 def create_contact():
@@ -29,7 +41,7 @@ def create_contact():
     return (jsonify({"message" : "聯繫人創建成功"}), 201) # 201表示創建成功
 
 
-@app.route("/update_contact/<int:id>", methods = ["PATCH"]) #PATCH用於更新部分資源 PUT用於更新全部資源 差別在於是否需要傳遞所有參數
+@app.route("/update_contact/<int:user_id>", methods = ["PATCH"]) #PATCH用於更新部分資源 PUT用於更新全部資源 差別在於是否需要傳遞所有參數
 def update_contact(user_id):
     contact = Contact.query.get(user_id)
 
